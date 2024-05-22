@@ -1,11 +1,39 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import React, {useState} from "react";
+import Item from './components/Item';
+import AddItem from './components/AddItem';
 
 export default function App() {
+
+  const [item, setItem] = useState();
+  const [items, setItems] = useState([]);
+
+
+  const removeItem = (index) => {
+    let itemsCopy = [...items]
+    itemsCopy.splice(index, 1);
+    setItems(itemsCopy);
+  }
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <View style={styles.itemsWrapper}>
+        <Text style={styles.title}>רשימת הקניות שלי</Text>
+        <View style={styles.items}>
+          {/* This is where the tasks will go */}
+          {
+            items.map((item, index) => {
+              return (
+                <TouchableOpacity onPress={removeItem} >
+                  <Item key={index} text={item} />
+                </TouchableOpacity>
+              )
+            })
+          }
+        </View>
+      </View>
+        <AddItem item={item} setItem={setItem} items={items} setItems={setItems} />
     </View>
   );
 }
@@ -13,8 +41,16 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: 'rgb(254 243 199)',
+   
+  },
+  itemsWrapper: {
+    paddingTop: 80,
+    paddingHorizontal: 20,
+  },
+  title: {
+    fontSize: 30,
+    fontWeight: "bold",
+    textAlign: 'center'
   },
 });
