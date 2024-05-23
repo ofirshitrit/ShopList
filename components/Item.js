@@ -1,55 +1,87 @@
-import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import React, { useState } from "react";
+import { View, Text, StyleSheet, TouchableOpacity, TextInput } from "react-native";
+import Icon from 'react-native-vector-icons/FontAwesome';
 
+const Item = ({ text, item, setItem, items, setItems }) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [editText, setEditText] = useState(text);
 
-const Item = (props) => {
+  const handleEditPress = () => {
+    setIsEditing(true);
+  };
+
+  const handleSavePress = () => {
+    const updatedItems = items.map((i) =>
+      i === item ? { ...i, text: editText } : i
+    );
+    setItems(updatedItems);
+    setIsEditing(false);
+  };
+
   return (
     <View style={styles.item}>
-        {/* <View style = {styles.square}></View> */}
-        <Text style = {styles.itemText}>{props.text}</Text>
-        {/* <Image ></Image> */}
+      <TouchableOpacity style={styles.editBtn} onPress={handleEditPress}>
+        <Icon name="pencil" size={30} color="#000" />
+      </TouchableOpacity>
+      {isEditing ? (
+        <>
+          <TouchableOpacity onPress={handleSavePress}>
+            <Icon name="check" size={30} color="#000" />
+          </TouchableOpacity>
+
+          <TextInput
+            style={styles.input}
+            value={editText}
+            onChangeText={setEditText}
+          />
+          
+        </>
+        
+      ) : (
+        <Text style={styles.itemText}>{text}</Text>
+      )}
+      
+
+      <TouchableOpacity>
+        <View style={styles.square}></View>
+      </TouchableOpacity>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
-  item:{
-    backgroundColor: 'rgb(252 211 77)',
+  item: {
     padding: 15,
     borderRadius: 10,
     marginBottom: 20,
     marginTop: 15,
-    // width: 100,
-    // height:100,
-    // alignItems: "center",
-    // justifyContent: "center",
-    // flexDirection: "row",
-    // alignItems: 'center',
-    // flexWrap: 'wrap'
+    borderBottomWidth: 2,
+    borderBottomColor: 'black',
+    alignItems: "center",
+    justifyContent: 'space-between',
+    flexDirection: "row",
+    flexWrap: 'wrap',
   },
-  // square:{
-  //   width: 24,
-  //   height: 24,
-  //   backgroundColor: '#55BCF6',
-  //   opacity: 0.4,
-  //   borderRadius: 4,
-  //   marginRight: 15,
-
-  // },
-  
-  itemText:{
-    fontSize: 25,
-    maxWidth: '90%',
-    textAlign: 'right',
-    // textAlign: 'center',
-    fontFamily: 'ui-monospace'
-    
-    
-
-
+  square: {
+    width: 24,
+    height: 24,
+    backgroundColor: "rgb(252 211 77)",
+    opacity: 0.4,
+    borderRadius: 4,
+    borderColor: "rgb(252 211 77)",
+    marginRight: 15,
   },
-  
-
+  itemText: {
+    fontSize: 15,
+  },
+  editBtn: {
+    marginRight: 10,
+  },
+  input: {
+    fontSize: 15,
+    flex: 1,
+    textAlign: 'center',
+  },
 });
 
 export default Item;

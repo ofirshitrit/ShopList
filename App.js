@@ -25,9 +25,7 @@ export default function App() {
           {
             items.map((item, index) => {
               return (
-                <TouchableOpacity onPress={removeItem} >
-                  <Item key={index} text={item} />
-                </TouchableOpacity>
+                <Item key={index} text={item} item={item} setItem={setItem} items={items} setItems={setItems} />
               )
             })
           }
