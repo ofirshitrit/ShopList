@@ -68,6 +68,7 @@ const styles = StyleSheet.create({
   addText: {
    fontSize: 24,
    fontWeight: 'bold',
+   fontFamily: "Times New Roman",
    
   },
 });

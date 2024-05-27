@@ -57,12 +57,12 @@ const Item = ({ text, item, setItem, items, setItems }) => {
   return (
     <View style={styles.item}>
       <TouchableOpacity style={styles.editBtn} onPress={handleEditPress}>
-        <Icon name="pencil" size={25} color="#000" />
+        <Icon name="pencil" size={22} color="rgba(0, 0, 0, 0.5)" />
       </TouchableOpacity>
       {isEditing ? (
         <>
           <TouchableOpacity onPress={handleSavePress}>
-            <Icon name="check" size={25} color="#000" />
+            <Icon name="check" size={25} color="#D2691E" />
           </TouchableOpacity>
           <TextInput
             style={styles.input}
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     marginTop: 15,
     borderBottomWidth: 2,
-    borderBottomColor: "black",
+    borderBottomColor: "rgba(0, 0, 0, 0.5)",
     alignItems: "center",
     justifyContent: "space-between",
     flexDirection: "row",
@@ -120,6 +120,7 @@ const styles = StyleSheet.create({
   itemText: {
     fontSize: 20,
     fontWeight: "bold",
+    
   },
   editBtn: {
     marginRight: 10,
