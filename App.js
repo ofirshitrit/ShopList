@@ -19,9 +19,8 @@ export default function App() {
   return (
     <View style={styles.container}>
       <View style={styles.itemsWrapper}>
-        <Text style={styles.title}>רשימת הקניות שלי</Text>
+        <Text style={styles.title}>רשימת הקניות שלנו</Text>
         <View style={styles.items}>
-          {/* This is where the tasks will go */}
           {
             items.map((item, index) => {
               return (
@@ -49,6 +48,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 30,
     fontWeight: "bold",
-    textAlign: 'center'
+    textAlign: 'center',
+    fontFamily: "Helvetica",
   },
 });

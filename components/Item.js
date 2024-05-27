@@ -11,6 +11,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 const Item = ({ text, item, setItem, items, setItems }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedText, setEditedText] = useState(text);
+  const [isMarked, setIsMarked] = useState(false);
 
   const handleEditPress = () => {
     setIsEditing(true);
@@ -25,15 +26,24 @@ const Item = ({ text, item, setItem, items, setItems }) => {
     setEditedText(inputText);
   };
 
+  const handleMarkItem = () => {
+    setIsMarked(true);
+
+    setTimeout(() => {
+      const updatedItems = items.filter((itm) => itm !== item);
+      setItems(updatedItems);
+    }, 500);
+  };
+
   return (
     <View style={styles.item}>
       <TouchableOpacity style={styles.editBtn} onPress={handleEditPress}>
-        <Icon name="pencil" size={30} color="#000" />
+        <Icon name="pencil" size={25} color="#000" />
       </TouchableOpacity>
       {isEditing ? (
         <>
           <TouchableOpacity onPress={handleSavePress}>
-            <Icon name="check" size={30} color="#000" />
+            <Icon name="check" size={25} color="#000" />
           </TouchableOpacity>
           <TextInput
             style={styles.input}
@@ -45,8 +55,10 @@ const Item = ({ text, item, setItem, items, setItems }) => {
         <Text style={styles.itemText}>{editedText}</Text>
       )}
 
-      <TouchableOpacity>
-        <View style={styles.square}></View>
+      <TouchableOpacity onPress={handleMarkItem}>
+        <View style={[styles.square, isMarked && styles.marked]}>
+          {isMarked && <Icon name="check" size={15} color="#000" />}
+        </View>
       </TouchableOpacity>
     </View>
   );
@@ -73,11 +85,12 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     borderColor: "rgb(252 211 77)",
     marginRight: 15,
+    alignItems: "center",
+    justifyContent: "center",
   },
   itemText: {
     fontSize: 20,
-    fontWeight: 'bold',
-
+    fontWeight: "bold",
   },
   editBtn: {
     marginRight: 10,
@@ -87,7 +100,7 @@ const styles = StyleSheet.create({
     flex: 1,
     textAlign: "center",
     color: "#D2691E",
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
 });
 
