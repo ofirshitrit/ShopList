@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     backgroundColor: "rgb(224 242 254)",
     borderRadius: 60,
     borderColor: "rgb(14 116 144)",
-    borderWidth: 4,
+    borderWidth: 3,
     width: 250,
     textAlign: "right",
   },
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderColor: "rgb(14 116 144)",
-    borderWidth: 4,
+    borderWidth: 3,
   },
   addText: {
    fontSize: 24,
