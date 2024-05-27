@@ -10,10 +10,14 @@ import {
   Keyboard,
 } from "react-native";
 
+import Icon from "react-native-vector-icons/FontAwesome";
+
 const AddItem = ({ item, setItem, items, setItems }) => {
   const handleAddItem = () => {
-    setItems([...items, item]);
-    setItem(null);
+    if (item && typeof item === 'string' && item.trim() !== "") {
+      setItems([...items, item.trim()]);
+      setItem(null);
+    }
   };
 
   return (
@@ -21,10 +25,8 @@ const AddItem = ({ item, setItem, items, setItems }) => {
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={styles.writeItemWrapper}
     >
-      <TouchableOpacity onPress={handleAddItem}>
-        <View style={styles.addWrapper}>
-          <Text style={styles.addText}>+</Text>
-        </View>
+      <TouchableOpacity onPress={handleAddItem} style={styles.addWrapper}>
+        <Icon name="plus" size={22} color="#000" />
       </TouchableOpacity>
       <TextInput
         style={styles.input}
