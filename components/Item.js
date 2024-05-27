@@ -1,21 +1,28 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, TextInput } from "react-native";
-import Icon from 'react-native-vector-icons/FontAwesome';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  TextInput,
+} from "react-native";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 const Item = ({ text, item, setItem, items, setItems }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [editText, setEditText] = useState(text);
+  const [editedText, setEditedText] = useState(text);
 
   const handleEditPress = () => {
     setIsEditing(true);
   };
 
   const handleSavePress = () => {
-    const updatedItems = items.map((i) =>
-      i === item ? { ...i, text: editText } : i
-    );
-    setItems(updatedItems);
+    setItem({ ...item, text: editedText });
     setIsEditing(false);
+  };
+
+  const handleInputChange = (inputText) => {
+    setEditedText(inputText);
   };
 
   return (
@@ -28,19 +35,15 @@ const Item = ({ text, item, setItem, items, setItems }) => {
           <TouchableOpacity onPress={handleSavePress}>
             <Icon name="check" size={30} color="#000" />
           </TouchableOpacity>
-
           <TextInput
             style={styles.input}
-            value={editText}
-            onChangeText={setEditText}
+            value={editedText}
+            onChangeText={handleInputChange}
           />
-          
         </>
-        
       ) : (
-        <Text style={styles.itemText}>{text}</Text>
+        <Text style={styles.itemText}>{editedText}</Text>
       )}
-      
 
       <TouchableOpacity>
         <View style={styles.square}></View>
@@ -56,11 +59,11 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     marginTop: 15,
     borderBottomWidth: 2,
-    borderBottomColor: 'black',
+    borderBottomColor: "black",
     alignItems: "center",
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
     flexDirection: "row",
-    flexWrap: 'wrap',
+    flexWrap: "wrap",
   },
   square: {
     width: 24,
@@ -72,15 +75,19 @@ const styles = StyleSheet.create({
     marginRight: 15,
   },
   itemText: {
-    fontSize: 15,
+    fontSize: 20,
+    fontWeight: 'bold',
+
   },
   editBtn: {
     marginRight: 10,
   },
   input: {
-    fontSize: 15,
+    fontSize: 20,
     flex: 1,
-    textAlign: 'center',
+    textAlign: "center",
+    color: "#D2691E",
+    fontWeight: 'bold',
   },
 });
 
