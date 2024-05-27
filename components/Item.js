@@ -1,18 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect  } from "react";
 import {
   View,
   Text,
   StyleSheet,
   TouchableOpacity,
   TextInput,
+  Modal,
+  Button,
+  Image,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
+import * as ImagePicker from "expo-image-picker";
 
 const Item = ({ text, item, setItem, items, setItems }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedText, setEditedText] = useState(text);
   const [isMarked, setIsMarked] = useState(false);
+  const [image, setImage] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false);
 
+  
   const handleEditPress = () => {
     setIsEditing(true);
   };
@@ -30,16 +37,43 @@ const Item = ({ text, item, setItem, items, setItems }) => {
     setIsMarked(true);
 
     setTimeout(() => {
-      // TODO: make it disappear slowly 
+      // TODO: make it disappear slowly
       const updatedItems = items.filter((itm) => itm !== item);
       setItems(updatedItems);
     }, 250);
   };
 
-
   const handleDisplayImage = () => {
-    
-  }
+    setModalVisible(true);
+  };
+
+  const handleChooseFromGallery = async () => {
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+  
+    if (!result.cancelled) {
+      // Update the image state here
+      setImage(result.assets[0].uri); 
+    }
+  };
+  
+  
+
+  // const handleTakePhoto = async () => {
+  //   const result = await ImagePicker.launchCameraAsync({
+  //     allowsEditing: true,
+  //     aspect: [4, 3],
+  //     quality: 1,
+  //   });
+
+  //   if (!result.cancelled) {
+  //     setImage(result.uri);
+  //   }
+  // };
 
   return (
     <View style={styles.item}>
@@ -68,6 +102,35 @@ const Item = ({ text, item, setItem, items, setItems }) => {
           {isMarked && <Icon name="check" size={15} color="#000" />}
         </View>
       </TouchableOpacity>
+
+      {/* TODO: change the UI of the Modal */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <View style={styles.modalContainer}>
+          {image ? (
+            <Image source={{ uri: image }} style={styles.image} />
+          ) : (
+            <View>
+              <Button
+                title="Choose from Gallery"
+                onPress={handleChooseFromGallery}
+              />
+                {/* TODO: add take photo fuctionality */}
+               {/* <Button title="Take Photo" onPress={handleTakePhoto} /> */}
+            </View>
+          )}
+          <Button
+            title="Close"
+            onPress={() => setModalVisible(!modalVisible)}
+          />
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -109,6 +172,17 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#D2691E",
     fontWeight: "bold",
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  image: {
+    width: 300,
+    height: 300,
+    marginBottom: 20,
   },
 });
 

@@ -14,7 +14,8 @@
     "react": "18.2.0",
     "react-native": "0.74.1",
     "react-native-vector-icons": "^10.1.0",
-    "undefined": "@expo-google-fonts/<font-name>"
+    "undefined": "@expo-google-fonts/<font-name>",
+    "expo-image-picker": "~15.0.5"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
