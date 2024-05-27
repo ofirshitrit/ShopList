@@ -109,10 +109,11 @@ const styles = StyleSheet.create({
   square: {
     width: 24,
     height: 24,
-    backgroundColor: "rgb(252 211 77)",
+    backgroundColor: "rgb(224 242 254)",
     opacity: 0.4,
     borderRadius: 4,
-    borderColor: "rgb(252 211 77)",
+    borderColor: "rgb(14 116 144)",
+    borderWidth: 3,
     marginRight: 15,
     alignItems: "center",
     justifyContent: "center",

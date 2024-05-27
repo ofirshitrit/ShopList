@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     margin: 20,
-    backgroundColor: 'rgb(254 243 199)',
+    backgroundColor: 'rgb(209 250 229)',
     borderRadius: 20,
     padding: 35,
     shadowColor: '#000',
@@ -80,14 +80,14 @@ const styles = StyleSheet.create({
     borderRadius: 40,
   },
   buttonText: {
-    color: 'black',
+    color: 'rgb(15 118 110)',
     fontSize: 20,
     textAlign: 'center',
     fontWeight: "bold",
   },
 
   button: {
-    backgroundColor: 'rgb(253 230 138)',
+    backgroundColor: 'white',
     borderRadius: 10,
     padding: 10,
     marginVertical: 5,

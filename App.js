@@ -34,7 +34,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'rgb(254 243 199)',
+    backgroundColor: 'rgb(207 250 254)',
    
   },
   itemsWrapper: {
@@ -42,8 +42,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   titleWrapper: {
-    padding: 8,
-    backgroundColor: "rgb(202 138 4)",
+    padding: 5,
+    backgroundColor: "rgb(14 116 144)",
     borderRadius: 100,
     shadowColor: '#000',
     shadowOffset: {
