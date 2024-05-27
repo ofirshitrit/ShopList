@@ -10,7 +10,7 @@ import {
   Image,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
-import * as ImagePicker from "expo-image-picker";
+import ImageModal from "./ImageModal";
 
 const Item = ({ text, item, setItem, items, setItems }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -47,34 +47,13 @@ const Item = ({ text, item, setItem, items, setItems }) => {
     setModalVisible(true);
   };
 
-  const handleChooseFromGallery = async () => {
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
   
-    if (!result.cancelled) {
-      // Update the image state here
-      setImage(result.assets[0].uri); 
-    }
+  const handleImageSelect = (selectedImage) => {
+    setImage(selectedImage);
+    setModalVisible(true);
   };
   
-  
-
-  // const handleTakePhoto = async () => {
-  //   const result = await ImagePicker.launchCameraAsync({
-  //     allowsEditing: true,
-  //     aspect: [4, 3],
-  //     quality: 1,
-  //   });
-
-  //   if (!result.cancelled) {
-  //     setImage(result.uri);
-  //   }
-  // };
-
+ 
   return (
     <View style={styles.item}>
       <TouchableOpacity style={styles.editBtn} onPress={handleEditPress}>
@@ -104,33 +83,12 @@ const Item = ({ text, item, setItem, items, setItems }) => {
       </TouchableOpacity>
 
       {/* TODO: change the UI of the Modal */}
-      <Modal
-        animationType="slide"
-        transparent={true}
+      <ImageModal
         visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(!modalVisible);
-        }}
-      >
-        <View style={styles.modalContainer}>
-          {image ? (
-            <Image source={{ uri: image }} style={styles.image} />
-          ) : (
-            <View>
-              <Button
-                title="Choose from Gallery"
-                onPress={handleChooseFromGallery}
-              />
-                {/* TODO: add take photo fuctionality */}
-               {/* <Button title="Take Photo" onPress={handleTakePhoto} /> */}
-            </View>
-          )}
-          <Button
-            title="Close"
-            onPress={() => setModalVisible(!modalVisible)}
-          />
-        </View>
-      </Modal>
+        image={image}
+        onClose={() => setModalVisible(false)}
+        onSelectImage={handleImageSelect}
+      />
     </View>
   );
 };
