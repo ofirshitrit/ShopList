@@ -10,16 +10,12 @@ export default function App() {
   const [items, setItems] = useState([]);
 
 
-  const removeItem = (index) => {
-    let itemsCopy = [...items]
-    itemsCopy.splice(index, 1);
-    setItems(itemsCopy);
-  }
-
   return (
     <View style={styles.container}>
       <View style={styles.itemsWrapper}>
-        <Text style={styles.title}>רשימת הקניות שלנו</Text>
+        <View style={styles.titleWrapper}>
+          <Text style={styles.title}>רשימת הקניות שלנו</Text>
+        </View>
         <View style={styles.items}>
           {
             items.map((item, index) => {
@@ -45,10 +41,26 @@ const styles = StyleSheet.create({
     paddingTop: 80,
     paddingHorizontal: 20,
   },
+  titleWrapper: {
+    padding: 8,
+    backgroundColor: "rgb(202 138 4)",
+    borderRadius: 100,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
   title: {
     fontSize: 30,
     fontWeight: "bold",
     textAlign: 'center',
-    fontFamily: "Helvetica",
+    fontFamily: "Times New Roman",
+    color: '#FFFFFF'
+    
+
   },
 });
