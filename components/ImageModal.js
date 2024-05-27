@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Modal, Button, View, StyleSheet, Image, TouchableOpacity, Text } from "react-native";
 import * as ImagePicker from "expo-image-picker";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 {
   /* TODO: change the UI of the Modal */
@@ -36,12 +37,13 @@ const ImageModal = ({ image, visible, onClose, onSelectImage }) => {
           ) : (
             <View>
               <TouchableOpacity style={styles.button} onPress={handleChooseFromGallery}>
-                <Text style={styles.buttonText}>Choose from Gallery</Text>
+                <Text style={styles.buttonText}>בחר מהגלרייה</Text>
               </TouchableOpacity>
             </View>
           )}
           <TouchableOpacity style={styles.button} onPress={onClose}>
-            <Text style={styles.buttonText}>Close</Text>
+            {/* <Text style={styles.buttonText}>סגור</Text> */}
+            <Icon name="times" size={25} color="#D2691E" style={styles.buttonText} />
           </TouchableOpacity>
         </View>
       </View>
@@ -61,7 +63,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     margin: 20,
-    backgroundColor: 'rgb(209 250 229)',
+    backgroundColor: 'rgb(207 250 254)',
     borderRadius: 20,
     padding: 35,
     shadowColor: '#000',
@@ -80,14 +82,14 @@ const styles = StyleSheet.create({
     borderRadius: 40,
   },
   buttonText: {
-    color: 'rgb(15 118 110)',
+    color: 'white',
     fontSize: 20,
     textAlign: 'center',
     fontWeight: "bold",
   },
 
   button: {
-    backgroundColor: 'white',
+    backgroundColor: 'rgb(14 116 144)',
     borderRadius: 10,
     padding: 10,
     marginVertical: 5,
