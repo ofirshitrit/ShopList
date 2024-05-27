@@ -30,10 +30,16 @@ const Item = ({ text, item, setItem, items, setItems }) => {
     setIsMarked(true);
 
     setTimeout(() => {
+      // TODO: make it disappear slowly 
       const updatedItems = items.filter((itm) => itm !== item);
       setItems(updatedItems);
-    }, 500);
+    }, 250);
   };
+
+
+  const handleDisplayImage = () => {
+    
+  }
 
   return (
     <View style={styles.item}>
@@ -52,7 +58,9 @@ const Item = ({ text, item, setItem, items, setItems }) => {
           />
         </>
       ) : (
-        <Text style={styles.itemText}>{editedText}</Text>
+        <TouchableOpacity onPress={handleDisplayImage}>
+          <Text style={styles.itemText}>{editedText}</Text>
+        </TouchableOpacity>
       )}
 
       <TouchableOpacity onPress={handleMarkItem}>

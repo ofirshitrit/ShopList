@@ -12,7 +12,6 @@ import {
 
 const AddItem = ({ item, setItem, items, setItems }) => {
   const handleAddItem = () => {
-    Keyboard.dismiss(); // make the keybord down when the item is added
     setItems([...items, item]);
     setItem(null);
   };
