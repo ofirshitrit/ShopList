@@ -26,7 +26,7 @@ const AddItem = ({ item, setItem, items, setItems }) => {
       style={styles.writeItemWrapper}
     >
       <TouchableOpacity onPress={handleAddItem} style={styles.addWrapper}>
-        <Icon name="plus" size={22} color="#000" />
+        <Icon name="plus" size={22} color="rgb(14 116 144)" />
       </TouchableOpacity>
       <TextInput
         style={styles.input}

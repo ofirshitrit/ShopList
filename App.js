@@ -9,12 +9,14 @@ export default function App() {
   const [item, setItem] = useState();
   const [items, setItems] = useState([]);
 
+  const title = "רשימת הקניות שלי"
 
   return (
     <View style={styles.container}>
+      
       <View style={styles.itemsWrapper}>
         <View style={styles.titleWrapper}>
-          <Text style={styles.title}>רשימת הקניות שלנו</Text>
+          <Text style={styles.title}>{title}</Text>
         </View>
         <View style={styles.items}>
           {
@@ -28,6 +30,7 @@ export default function App() {
       </View>
         <AddItem item={item} setItem={setItem} items={items} setItems={setItems} />
     </View>
+    
   );
 }
 

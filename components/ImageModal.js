@@ -10,6 +10,8 @@ import Icon from "react-native-vector-icons/FontAwesome";
   /* TODO: add take photo */
 }
 const ImageModal = ({ image, visible, onClose, onSelectImage }) => {
+
+  const chooseFromGallery = "בחר מהגלרייה"
   const handleChooseFromGallery = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -37,12 +39,11 @@ const ImageModal = ({ image, visible, onClose, onSelectImage }) => {
           ) : (
             <View>
               <TouchableOpacity style={styles.button} onPress={handleChooseFromGallery}>
-                <Text style={styles.buttonText}>בחר מהגלרייה</Text>
+                <Text style={styles.buttonText}>{chooseFromGallery}</Text>
               </TouchableOpacity>
             </View>
           )}
           <TouchableOpacity style={styles.button} onPress={onClose}>
-            {/* <Text style={styles.buttonText}>סגור</Text> */}
             <Icon name="times" size={25} color="#D2691E" style={styles.buttonText} />
           </TouchableOpacity>
         </View>
@@ -83,9 +84,10 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: 'white',
-    fontSize: 20,
+    fontSize: 25,
     textAlign: 'center',
     fontWeight: "bold",
+    fontFamily: "Times New Roman",
   },
 
   button: {
